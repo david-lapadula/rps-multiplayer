@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- Link to jQuery library-->
+    <link href="https://fonts.googleapis.com/css?family=Concert+One|Plaster" rel="stylesheet">   <!--Google Fonts--> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> <!-- Bootstrap used to design the layout-->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>  <!-- External style sheet for custom aesthetic adjustments-->
+    <link rel="shortcut icon" href="assets/images/favicon_RPS.ico" type="image/x-icon">     <!-- Favicon-->  
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>  <!-- Firebase DB-->
+    <title>Rock Paper Scissors</title> 
+</head>     
+<body>
+    <header id="header-div" class="bg-light heading-font m-auto d-flex align-items-center justify-content-center">
+        <h1 id="header-text">
+            The Ultimate   
+        </h1> 
+        <img src="assets/images/heading_logo.png" alt="RPS Logo" id="header-img" class="m-1">
+    </header>   
+    <div id="add-player-form" class="row pt-2 mt-2">
+        <div class="m-auto  bg-white" id="prompt-section">  
+            <form autocomplete="off" class="p-3">
+                <div class="row"> 
+                    <div class="col-lg-8 col-sm-12 content-font">
+                        <input type="input" class="mr-3" id="add-player-input" placeholder="Enter Player Name">
+                    </div> 
+                    <div class="col-lg-4 col-sm-12 content-font">   
+                        <button type="submit" id="add-player-button">Submit</button>
+                    </div>  
+                </div>
+            </form> 
+        </div>  
+    </div> 
+
+    <script src="assets/javascript/rps_logic.js"></script> <!--Link to external javascript file with jquery   --> 
+</body>
+</html>

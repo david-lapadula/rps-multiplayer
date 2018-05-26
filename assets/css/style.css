@@ -1,0 +1,92 @@
+body {
+    background-image: url("../images/RPS_background.png");
+    background-size: cover; 
+    background-attachment: fixed; 
+    background-position: center; 
+    margin-top: 1vh;  
+} 
+ 
+.heading-font {
+    font-family: 'Plaster', cursive;
+}
+
+.content-font {
+    font-family: 'Concert One', cursive;
+} 
+ 
+#header-div {
+    width: 60vw; 
+    border-radius: 15%; 
+    border: 0.5em solid rgb(143, 128, 47);  
+}
+
+#header-text {
+    display:inline; 
+    font-size: 5vw; 
+}
+
+#header-img {
+    border-radius: 90%; 
+    border: 0.25em solid black;
+    width: 8vw;   
+}
+
+#prompt-section {
+    border-radius: 15%; 
+    border: 0.2em solid rgb(143, 128, 47); 
+    width: 30vw;  
+}  
+
+#prompt-section form {
+    width: 100%; 
+    font-size: 1.5vw; 
+}   
+ 
+#add-player-input {
+    width: 100%; 
+    text-align: center; 
+    border-radius: 15%;  
+    outline: none; 
+    color:  rgb(143, 128, 47);  
+}
+
+#add-player-input:focus {
+    border: 0.1em solid rgb(143, 128, 47);  
+}  
+
+#add-player-button {
+    width: 100%; 
+    text-align: center; 
+    background-color: rgb(143, 128, 47); 
+    color: white; 
+    border-radius: 15%; 
+    outline: none; 
+}
+ 
+#add-player-button:hover {
+    color: rgb(143, 128, 47); 
+    background-color: white; 
+}
+     
+
+/* Media Queries */ 
+
+@media screen and (max-width: 960px) {
+
+    #header-img {
+        width: 9vw;   
+    }
+    
+    #prompt-section {
+        width: 60vw;  
+    } 
+ 
+    #prompt-section form {
+        width: 100%; 
+        font-size: 2vw; 
+    }   
+
+
+}
+
+
