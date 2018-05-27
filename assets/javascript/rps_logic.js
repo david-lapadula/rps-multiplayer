@@ -20,4 +20,4 @@ document.ready(function () {
 
 });  
 
-// https://github.com/angrbrd/multiplayer-rps OR https://github.com/mattbajorek/RPS-Multiplayer
+// https://github.com/angrbrd/multiplayer-rps(https://github.com/angrbrd/multiplayer-rps/blob/master/assets/js/app.js) OR https://github.com/mattbajorek/RPS-Multiplayer
