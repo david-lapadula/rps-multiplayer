@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- Link to jQuery library-->
     <link href="https://fonts.googleapis.com/css?family=Concert+One|Plaster" rel="stylesheet">   <!--Google Fonts--> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> <!-- Bootstrap used to design the layout-->
@@ -11,34 +11,33 @@
     <link rel="shortcut icon" href="assets/images/favicon_RPS.ico" type="image/x-icon">     <!-- Favicon-->  
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>  <!-- Firebase DB-->
     <title>Rock Paper Scissors</title> 
-</head>     
-<body> 
+</head>      
+<body>   
     <header id="header-div" class="bg-light heading-font m-auto d-flex align-items-center justify-content-center">
-        <h1 id="header-text">
-            The Ultimate   
-        </h1> 
+        <h1 id="header-text"> 
+            The Ultimate      
+        </h1>  
         <img src="assets/images/heading_logo.png" alt="RPS Logo" id="header-img" class="m-1">
     </header>   
     <div id="add-player-form" class="row pt-2 mb-2">
         <div class="m-auto  bg-white" id="prompt-section">  
             <form autocomplete="off" class="p-3">
-                <div class="row"> 
+                <div class="row">  
                     <div class="col-lg-8 col-sm-12 content-font">
                         <input type="input" class="mr-3" id="add-player-input" placeholder="Enter Player Name">
                     </div> 
                     <div class="col-lg-4 col-sm-12 content-font">   
                         <button type="submit" id="add-player-button">Submit</button>
                     </div>  
-                </div>
-            </form> 
-        </div>
+                </div>  
+            </form>  
+        </div> 
         <div class="m-auto bg-white content-font" id="top-message">  
-            <p>
-                Current Player Screen
-            </p>
-         </div>
-    </div> 
-    <div>
+            <p> 
+            </p>     
+         </div>  
+    </div>   
+    <div>  
         <div class="row m-auto d-flex justify-content-center" id="gameplay-section">
             <div class="col-3 m-1"> 
                 <div class="rounded" id="player1-div">
@@ -48,109 +47,108 @@
                                 <p id="player1-name"> Player 1 </p>
                             </div>  
                             <div class="col-5 p-0 d-flex justify-content-end"> 
-                                <img class= "img-fluid w-75 h-100" src="assets/images/red_character.jpg">
-                            </div>
-                        </div>  
-                        <div class="row m-0 p-0 border-top border-bottom border-danger d-flex justify-content-center align-items-center">
-                            <button type="button" class="btn mr-1" id="player1-rock">Rock</button>
-                            <button type="button" class="btn mr-1" id="player1-paper">Paper</button> 
-                            <button type="button" class="btn mr-1" id="player1-scissors">Scissors</button>
-                        </div> 
+                                <img class= "img-fluid w-75 h-100" src="assets/images/red_character.jpg" id="player1-char">
+                            </div> 
+                         </div>     
+                        <div id="player1-button-row" class="row m-0 p-0 border-top border-bottom border-danger d-flex justify-content-center align-items-center">
+                            <button type="submit" class="btn mr-1 player1-button" data-choice="rock">Rock</button> 
+                            <button type="submit" class="btn mr-1 player1-button" data-choice="paper">Paper</button> 
+                            <button type="submit" class="btn mr-1 player1-button" data-choice="scissors">Scissors</button>
+                        </div>   
                         <div class="row m-0 content-font stats-style text-center" >
                             <div class="col-4 h-100 p-0">
                                <p class="d-block h-50 m-0"> Wins </p>
-                               <p class="d-block h-50 m-0" id="player1-wins">  0 </p> 
-                            </div>
+                               <p class="d-block h-50 m-0" id="player1-wins"></p> 
+                            </div>  
                             <div class="col-4 p-0"> 
-                                <p class="d-block h-50 m-0"> Losses </p>
-                                <p class="d-block h-50 m-0" id="player1-losses">  0 </p> 
+                                <p class="d-block h-50 m-0"> Losses </p> 
+                                <p class="d-block h-50 m-0" id="player1-losses"></p> 
                             </div>
                             <div class="col-4 p-0">
                                 <p class="d-block h-50 m-0"> Ties </p>
-                                <p class="d-block h-50 m-0" id="player1-ties">  0 </p> 
+                                <p class="d-block h-50 m-0" id="player1-ties"></p> 
                             </div>
-                        </div>  
-                    </div>
-                    <!-- <div class ="content-font d-flex align-items-center justify-content-center" id="player1-waiting">
+                        </div>   
+                    </div> 
+                    <div class ="content-font d-flex align-items-center justify-content-center" id="player1-waiting">
                         <p>Awaiting Player 1 </p>
-                    </div>  -->
+                    </div>    
                 </div> 
-            </div>    
-            <div class="col-5 m-1">
+            </div>       
+            <div class="col-5 m-1"> 
                 <div class="row rounded" id="game-control-div">  
                     <div class="col-6 h-75 d-flex align-items-center justify-content-center border-right border-dark">
-                        <img class="h-75 w-75" src="assets/images/paper_logo.jpg" id="player1-img-choice">  
+                        <img class="h-75 w-75"  id="player1-img-choice">  
                     </div> 
                     <div class="col-6 h-75 d-flex align-items-center justify-content-center">
-                        <img class="h-75 w-75" src="assets/images/paper_logo.jpg" id="player2-img-choice"> 
+                        <img class="h-75 w-75" id="player2-img-choice"> 
                     </div>   
                     <div class="row w-100 h-25 p-0 m-0 border-top border-dark d-flex justify-content-center align-items-center content-font" id="game-result-message">
-                        <p class="m-0 p-0"> This is a test</p>
-                    </div>
-                </div>    
-            </div>   
+                        <p class="m-0 p-0"></p>
+                    </div> 
+                </div>     
+            </div>        
             <div class="col-3 m-1"> 
-                <div class="rounded" id="player2-div"> 
+                <div class="rounded" id="player2-div">  
                     <div class="content-font" id="player2-active"> 
                         <div class="row m-2"> 
                             <div class="col-5 p-0 d-flex justify-content-end"> 
-                                <img class= "img-fluid w-75 h-100" src="assets/images/blue_character.jpg">
+                                <img class= "img-fluid w-75 h-100" src="assets/images/blue_character.jpg" id="player2-char">
                             </div>
                             <div class="col-7 p-0 d-flex justify-content-center align-items-center">
                                 <p id="player2-name"> Player 2 </p>
-                            </div>  
+                            </div>      
+                        </div>     
+                        <div id="player2-button-row" class="row m-0 p-0 border-top border-bottom border-primary d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn mr-1 player2-button" data-choice="rock">Rock</button>
+                            <button type="button" class="btn mr-1 player2-button" data-choice="paper">Paper</button>  
+                            <button type="button" class="btn mr-1 player2-button" data-choice="scissors">Scissors</button>
                         </div>  
-                        <div class="row m-0 p-0 border-top border-bottom border-primary d-flex justify-content-center align-items-center">
-                            <button type="button" class="btn mr-1" id="player2-rock">Rock</button>
-                            <button type="button" class="btn mr-1" id="player2-paper">Paper</button> 
-                            <button type="button" class="btn mr-1" id="player2-scissors">Scissors</button>
-                        </div> 
-                        <div class="row m-0 content-font stats-style text-center" >
+                        <div class="row m-0 content-font stats-style text-center" > 
                             <div class="col-4 h-100 p-0"> 
                                 <p class="d-block h-50 m-0"> Wins </p>
-                                <p class="d-block h-50 m-0" id="player2-wins">  0 </p> 
-                            </div> 
-                            <div class="col-4 p-0"> 
+                                <p class="d-block h-50 m-0" id="player2-wins"></p> 
+                            </div>  
+                            <div class="col-4 p-0">  
                                 <p class="d-block h-50 m-0"> Losses </p>
-                                <p class="d-block h-50 m-0" id="player2-losses">  0 </p> 
+                                <p class="d-block h-50 m-0" id="player2-losses"></p> 
                             </div>
                             <div class="col-4 p-0">
                                 <p class="d-block h-50 m-0"> Ties </p>
-                                <p class="d-block h-50 m-0" id="player2-ties">  0 </p> 
-                            </div>
-                        </div>
+                                <p class="d-block h-50 m-0" id="player2-ties"></p> 
+                            </div>  
+                        </div>          
                     </div> 
-                    <!-- <div class ="content-font d-flex align-items-center justify-content-center" id="player2-waiting">
-                        <p>Awaiting Player 2 </p>
-                    </div>  -->
-                </div>
-            </div>  
-        </div>
+                    <div class ="content-font d-flex align-items-center justify-content-center" id="player2-waiting">
+                        <p>Awaiting Player 2 </p> 
+                    </div>    
+                </div>      
+            </div>           
+        </div>  
         <div class="row m-auto d-flex justify-content-center" id="messaging-section">
-            <div class="col-3 m-1" id="player1-msg-form">  
+            <div class="col-3 m-1" id="player1-msg-form">   
                 <div class="h-100 bg-white p-0 d-flex justify-content-center align-items-center">
-                    <div class="text-center">
+                    <div class="text-center"> 
                         <h1> Type Your Message! </h1>
                         <input class="form-control p-1 mt-2 mb-2" type="text" placeholder="Trash-talk goes here" id="player1-msg-text">  
                         <button type="submit" class="btn p-0" id="player1-msg-btn">Send</button> 
                     </div> 
                 </div>  
-            </div>  
-            <div class="col-8 m-1 bg-white content-font" style="overflow:auto;">
+            </div>    
+            <div  id="message-board" class="col-5 offset-md-4 m-1 bg-white content-font" style="overflow:auto;" >
                 <div class="p-2" id="message-board">
-                    <p> Talk some smack here</p>
-                </div>
-            </div>
-            <!-- <div class="col-3 m-1" id="player2-msg-form">
+                </div>  
+            </div> 
+            <div class="col-3 m-1" id="player2-msg-form">
                    <div class="h-100 bg-white p-0 d-flex justify-content-center align-items-center">
                     <div class="text-center">
                         <h1> Type Your Message! </h1>
                         <input class="form-control p-1 mt-2 mb-2" type="text" placeholder="Trash-talk goes here" id="player2-msg-text">  
-                        <button type="submit" class="btn p-0" id="player2-msg-btn">Send</button> 
+                        <button type="submit" class="btn p-0" id="player2-msg-btn">Send</button>  
                     </div> 
-                </div> 
-            </div>
-        </div> --> 
+                </div>  
+            </div>  
+        </div>   
     </div> 
     <script src="assets/javascript/rps_logic.js"></script> <!--Link to external javascript file  --> 
 </body>

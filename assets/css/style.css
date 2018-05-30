@@ -44,7 +44,6 @@ body {
     color: rgb(143, 128, 47); 
     font-size: 2.5vw; 
     text-align: center; 
-    display: none; 
 }  
 
 #prompt-section form {
@@ -102,7 +101,7 @@ body {
     height: 30%;
 } 
 
-#player1-active button {
+.player1-button { 
     color: white;
     background-color: red; 
     height: 5vh; 
@@ -112,11 +111,15 @@ body {
     text-align: center; 
 }
 
+.player1-button:hover { 
+    background-color:  rgb(143, 128, 47); 
+}
+
 #player1-waiting {
     color: rgb(143, 128, 47);  
     height: 100%; 
     font-size: 2vw;  
-}
+} 
 
 #player1-img-choice {
     border: 0.3em solid red; 
@@ -137,8 +140,8 @@ body {
     height: 30%;
 } 
 
-#player2-active button {
-    color: white;
+.player2-button { 
+    color: white; 
     background-color: blue; 
     height: 5vh; 
     width: 30%; 
@@ -146,6 +149,10 @@ body {
     padding: 0; 
     text-align: center; 
 } 
+ 
+.player2-button:hover { 
+    background-color:  rgb(143, 128, 47); 
+}
 
 #player2-img-choice {
     border: 0.3em solid blue; 
@@ -167,7 +174,7 @@ body {
 } 
 
 #game-result-message {
-    font-size: 3vw; 
+    font-size: 2.5vw; 
     color: rgb(143, 128, 47); 
 }
 
@@ -177,10 +184,10 @@ body {
     width: 90vw; 
     height: 15vh;
     
-} 
+}  
 
 #messaging-section .bg-white {
-    border: 0.3em solid rgb(143, 128, 47);  
+    border: 0.25em solid rgb(143, 128, 47);  
 }
 
 #messaging-section h1 {
@@ -188,11 +195,11 @@ body {
     font-size: 2vw; 
 }
  
-#message-board {
-    font-size: 1.5vw; 
+#message-board { 
+    font-size: 1.3vw; 
 }
   
-/* Player 1 Input form */ 
+/* Input form styling*/ 
 
 #player1-msg-form {
     color: red; 
