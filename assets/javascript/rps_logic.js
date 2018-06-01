@@ -18,6 +18,8 @@ $(document).ready(function () {
 
       // Used to keep name of specific player for personal diisplay features on each players interface
       var activePlayer= null; 
+      var playerTurn = null; 
+      var gameLive = null; 
 
       //Selectors for what is displayed above the gameplay section
       var promptSection = $("#prompt-section"); 
@@ -30,6 +32,7 @@ $(document).ready(function () {
       var messagingSection = $("#messaging-section"); 
       var player1MessageForm = $("#player1-msg-form"); 
       var player2MessageForm = $("#player2-msg-form"); 
+      var tempGameAnswer = $("#temp-game-answer");  
       var gameResultMessage = $("#game-result-message"); 
       var messageBoard = $("#message-board");  
 
@@ -72,9 +75,35 @@ player1MessageForm.children().removeClass('d-flex').hide();
 player2Active.removeClass('d-flex').hide(); 
 player2MessageForm.children().removeClass('d-flex').hide(); 
 topMessage.removeClass('d-flex').hide();   
+  
+// Logic of the game 
+var gameLogic = function () {
+  player1Buttons.children('.player1-button').removeClass('bg-dark'); 
+  player2Buttons.children('.player2-button').removeClass('bg-dark'); 
+    switch (player1.choice) {
+      case 'rock':
+          switch (player2.choice) {
+            case 'paper':
+            case 'scissors':
+            case 'rock': 
+          }
+        break; 
+      case 'paper':
+          switch (player2.choice) {
+            case 'rock':
+            case 'scissors':
+            case 'paper':
+          }
+        break; 
+      case 'scissors':
+          switch (player2.choice) {
+            case 'paper':
+            case 'rock':
+            case 'scissors':
+          }
+    }
 
- 
-//Add Actual logic of the game
+}    
   
 // Database references used during the game
 
@@ -97,7 +126,7 @@ topMessage.removeClass('d-flex').hide();
         player1Active.hide(); 
         player1Waiting.addClass('d-flex').show(); 
         player1Name.text("");   
-        //need to handle the outcome
+        rpsDatabase.ref("/outcome/").remove();
       }
      
       // Player 2 check
@@ -107,7 +136,7 @@ topMessage.removeClass('d-flex').hide();
         player2Waiting.removeClass('d-flex').hide();   
         player2Active.show();  
         player2Name.text(currentP2);    
-        player2Wins.text(player2.wins);
+        player2Wins.text(player2.wins);  
         player2Losses.text(player2.losses);  
         player2Ties.text(player2.ties); 
       } else {  
@@ -116,24 +145,28 @@ topMessage.removeClass('d-flex').hide();
         player2Active.hide();  
         player2Waiting.addClass('d-flex').show(); 
         player2Name.text("");  
-        // Need to handle the outcome
+        rpsDatabase.ref("/outcome/").remove();
       }  
+
+      if (!player1 || !player2) {
+        player1Div.removeClass('border-success'); 
+        player2Div.removeClass('border-success'); 
+        gameResultMessage.children().text(''); 
+        tempGameAnswer.children().text('Game Queue Open')
+      }
 
       // Game and database resets if both players leave the game
       if (!player1 && !player2) {
-        //Empty chat
-        //Empty turn 
-        //Empty outcome
-          //And corrsponding visual elements
+        rpsDatabase.ref("/messenger/").remove();
+        rpsDatabase.ref("/results/").remove();
+        rpsDatabase.ref("/turn/").remove();
       }; 
 
-      // Turn is to player if the game has started and both players are present
       if (player1 && player2) {
-        // Change top message
-        // Change game message
+        gameResultMessage.children().text(`${currentP1}\'s turn to choose`); 
+        player1Div.addClass('border-success'); 
       }; 
 
- 
       //Specialized Display for each player
       if  (activePlayer === currentP1 && currentP1 !== null) {
         player1MessageForm.children().addClass('d-flex').show();  
@@ -147,37 +180,39 @@ topMessage.removeClass('d-flex').hide();
         promptSection.hide();    
         topMessage.show().children().text(`${currentP2}, you are Player 2`);      
       }
-});   
+});     
 
-      // Listener to determine whos turn it is
-      rpsDatabase.ref("/turn/").on("value", function(snapshot) {
-        // Only allow the page to be seen if there is an open spot
-        if (snapshot.val() !== null && activePlayer === null && player1 && player2) {
-          promptSection.hide();   
-          gamePlaySection.removeClass('d-flex').hide(); 
-          messagingSection.removeClass('d-flex').hide(); 
-          topMessage.show().children().text('All players currently Full')
-        }    
-          if (snapshot.val() === 1) {
-              playerTurn = 1;
-                if (player1 && player2) {
-                gameResultMessage.text(`${player1} needs to choose`); 
-                player1Div.addClass('border-success'); 
-                player2Div.removeClass('border-success'); 
-                }
-              } else if (snapshot.val() === 2) {
-                playerTurn = 2;
-                if (player1 && player2) {
-                  gameResultMessage.text(`${player2} needs to choose`); 
-                  player2Div.addClass('border-success'); 
-                  player1Div.removeClass('border-success');  
-                }
-            }  
-      });    
 
-    // Database reference  to determine result of the game
+    // Listener to determine whos turn it is
+    rpsDatabase.ref("/turn/").on("value", function(snapshot) {
+      // Only allow the page to be seen if there is an open spot  
+      if (snapshot.val() !== null && activePlayer === null && player1 && player2) {
+        promptSection.hide();   
+        gamePlaySection.removeClass('d-flex').hide(); 
+        messagingSection.removeClass('d-flex').hide(); 
+        topMessage.show().children().text('All players occupied. Wait and then refresh the page')
+      }      
+        if (snapshot.val() === 1) {
+            playerTurn = 1;
+              if (player1 && player2) {
+              gameResultMessage.children().text(`${currentP1} needs to choose`); 
+              player1Div.addClass('border-success'); 
+              player2Div.removeClass('border-success'); 
+              } 
+        } else if (snapshot.val() === 2) {
+            playerTurn = 2;
+              if (player1 && player2) {   
+                gameResultMessage.children().text(`${currentP2} needs to choose`); 
+                player2Div.addClass('border-success'); 
+                player1Div.removeClass('border-success');  
+              }
+          }    
+    });    
+    
+
+    // Database reference to update the game result div
     rpsDatabase.ref("/results/").on("value", function(snapshot) {
-      //Display in div below images
+      gameResultMessage.children().text(snapshot.val()); 
     });  
 
     // Any new messages handled by this listener
@@ -197,16 +232,21 @@ topMessage.removeClass('d-flex').hide();
       messageBoard.append(newMsgEl);
       messageBoard.scrollTop(messageBoard[0].scrollHeight); 
     });
-
+ 
     // Message display for whenever a player leaves the game
     rpsDatabase.ref("/players/").on("child_removed", function(snapshot) {
-    playerDisconnectMsg = snapshot.val().name + " has left the game"; 
-    disconnectMsgEntry = rpsDatabase.ref().child("/chat/").push().key;  
-    rpsDatabase.ref("/messenger/" + disconnectMsgEntry).set(playerDisconnectMsg);
-    });   
+      playerDisconnectMsg = snapshot.val().name + " has left the game"; 
+      disconnectMsgEntry = rpsDatabase.ref().child("/chat/").push().key;  
+      rpsDatabase.ref("/messenger/" + disconnectMsgEntry).set(playerDisconnectMsg);
+      player1ImgChoice.removeAttr('src');  
+      player2ImgChoice.removeAttr('src');  
+      gameResultMessage.children().text('');  
+      player2Div.removeClass('border-success'); 
+      player1Div.removeClass('border-success'); 
+      tempGameAnswer.children().text('Game Queue Open');  
+    });    
 
-  
- 
+
 // All click events for the game
 
     //Submit Button
@@ -220,23 +260,24 @@ topMessage.removeClass('d-flex').hide();
               player1 = {
                 name: activePlayer,
                 wins: 0, 
-                losses: 0, 
+                losses: 0,  
                 ties: 0,      
                 move: ""    
               };  
-              rpsDatabase.ref().child("/turn").set(1);  
               rpsDatabase.ref().child("/players/player1").set(player1);   
               rpsDatabase.ref("/players/player1").onDisconnect().remove(); 
+                if (!player2) {
+                  rpsDatabase.ref().child("/turn").set(1);   
+                } 
             }  else if (player2 === null && addPlayerInput.val() !== '') {
               activePlayer = addPlayerInput.val().trim();
               player2 = { 
                 name: activePlayer,  
-                wins: 0, 
+                wins: 0,  
                 losses: 0, 
                 ties: 0,      
                 move: ""  
-              };  
-              rpsDatabase.ref().child("/turn").set(1);  
+              };   
               rpsDatabase.ref().child("/players/player2").set(player2);  
               rpsDatabase.ref("/players/player2").onDisconnect().remove(); 
             }  
@@ -256,8 +297,7 @@ topMessage.removeClass('d-flex').hide();
         rpsDatabase.ref("/messenger/" + player1MsgEntry).set(player1Msg); 
         player1MsgText.val('');   
       } 
-    });  
-
+    });   
     player2MsgBtn.on("click", function(event) {
       event.preventDefault();
       if (player2MsgText.val() !== "") { 
@@ -268,18 +308,44 @@ topMessage.removeClass('d-flex').hide();
       }
     });  
 
-    //Get the choice of each player from the button click
-
+    //Get the choice of each player from the button click. Only allow if both players are in the game, active user is the current player, and a choice has yet to be made.
     player1Buttons.on("click", ".player1-button" , function() {
-      event.preventDefault();  
-      console.log($(this).data('choice'));      
-    });    
-    
+      event.preventDefault();   
+      if (player1 && player2 && playerTurn === 1 && (activePlayer === currentP1) && player1.move === "") {
+        event.preventDefault();   
+        player1Move = $(this); 
+        player1Move.addClass('bg-dark'); 
+        rpsDatabase.ref('/players/').child('/player1/move').set(player1Move.data('choice'))
+        playerTurn = 2; 
+      }   
+    });      
     player2Buttons.on("click", ".player2-button" , function(event) {
       event.preventDefault(); 
-      console.log($(this).data('choice'));       
+      if (player1 && player2 && playerTurn === 2 && (activePlayer === currentP2) && player2.move === ""){  
+        event.preventDefault();  
+        player2Move = $(this); 
+        player2Move.addClass('bg-dark'); 
+        rpsDatabase.ref('/players/').child('/player2/move').set(player2Move.data('choice'))
+        gameLogic(); 
+      }       
     });  
  
-
- 
 });   
+
+/*  Change the display after game being won
+ var timeClock = function () {
+     timerSeconds = 20; 
+     timer.text('Time Remaining: ' + timerSeconds)
+     timedInterval = setInterval(timeCountdown, 1000) 
+ } 
+   
+ var timeCountdown = function () {
+     timerSeconds--; 
+     timer.text('Time Remaining: ' + timerSeconds)
+     if (timerSeconds < 1) {
+         clearInterval(timedInterval) 
+         userResults() 
+     } 
+   
+ } 
+*/ 

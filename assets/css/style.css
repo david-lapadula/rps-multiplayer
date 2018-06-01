@@ -161,8 +161,7 @@ body {
 #player2-name {
     font-size: 2vw; 
 }
-
-
+ 
 #player2-waiting {
     color: rgb(143, 128, 47);  
     height: 100%; 
@@ -173,7 +172,7 @@ body {
     font-size: 2vw; 
 } 
 
-#game-result-message {
+#game-result-message,  #temp-game-answer { 
     font-size: 2.5vw; 
     color: rgb(143, 128, 47); 
 }
