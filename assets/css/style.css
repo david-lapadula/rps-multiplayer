@@ -12,7 +12,8 @@ body {
 
 .content-font {
     font-family: 'Concert One', cursive;
-}  
+}
+
  
 #header-div {
     width: 60vw; 
@@ -66,17 +67,16 @@ body {
 #add-player-button {
     width: 100%; 
     text-align: center; 
-    background-color: rgb(143, 128, 47); 
+    background-color: rgb(143, 128, 47);  
     color: white; 
     border-radius: 15%; 
     outline: none; 
 }
- 
-#add-player-button:hover {
-    color: rgb(143, 128, 47); 
-    background-color: white; 
-}
 
+#add-player-button:hover {
+    background-color: black; 
+}
+ 
 /* First Row */
 
 #gameplay-section {
@@ -109,6 +109,10 @@ body {
     font-size: 1.5vw; 
     padding: 0; 
     text-align: center; 
+}
+
+.player1-button:hover {
+    background-color: rgb(143, 128, 47);  
 }
 
 #player1-waiting {
@@ -144,7 +148,11 @@ body {
     font-size: 1.5vw; 
     padding: 0; 
     text-align: center; 
-} 
+}
+
+.player2-button:hover {
+    background-color: rgb(143, 128, 47);  
+}  
  
 
 #player2-img-choice {
