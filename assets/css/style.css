@@ -40,7 +40,7 @@ body {
 #top-message {
     border-radius: 15%; 
     border: 0.1em solid rgb(143, 128, 47); 
-    width: 30vw;  
+    width: 45vw;  
     color: rgb(143, 128, 47); 
     font-size: 2.5vw; 
     text-align: center; 
@@ -111,10 +111,6 @@ body {
     text-align: center; 
 }
 
-.player1-button:hover { 
-    background-color:  rgb(143, 128, 47); 
-}
-
 #player1-waiting {
     color: rgb(143, 128, 47);  
     height: 100%; 
@@ -150,9 +146,6 @@ body {
     text-align: center; 
 } 
  
-.player2-button:hover { 
-    background-color:  rgb(143, 128, 47); 
-}
 
 #player2-img-choice {
     border: 0.3em solid blue; 
