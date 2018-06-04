@@ -14,7 +14,6 @@ body {
     font-family: 'Concert One', cursive;
 }
 
- 
 #header-div {
     width: 60vw; 
     border-radius: 15%; 
@@ -182,21 +181,21 @@ body {
 
 #messaging-section {
     width: 90vw; 
-    height: 20vh; 
+    height: 20vh;  
     
 }  
 
 #messaging-section .bg-white {
     border: 0.25em solid rgb(143, 128, 47);  
 }
-
+ 
 #messaging-section h1 {
     text-align: center; 
     font-size: 2vw; 
 }
  
 #message-board { 
-    font-size: 1.3vw; 
+    font-size: 1.5vw; 
 }
   
 /* Input form styling*/ 
