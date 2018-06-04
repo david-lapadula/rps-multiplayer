@@ -15,7 +15,7 @@ $(document).ready(function () {
   var rpsDatabase = firebase.database();   
      
   //Selectors
-
+ 
   // Used to keep name of specific player for personal diisplay features on each players interface and the current turn in the game
   var activePlayer= null; 
   var playerTurn = null; 
@@ -75,7 +75,7 @@ $(document).ready(function () {
   player2MessageForm.children().removeClass('d-flex').hide(); 
   topMessage.removeClass('d-flex').hide();
  
-  // Logic of the game  
+  // Logic of the game   
   var gameLogic = function () {
       switch (player1.move) { 
         case 'rock':
@@ -87,7 +87,7 @@ $(document).ready(function () {
                 rpsDatabase.ref().child("/players/player2/wins").set(player2.wins + 1);  
                 rpsDatabase.ref().child("/status/").set(`${player2.name} wins with paper!`);
                 break; 
-              case 'scissors':
+              case 'scissors': 
                 rpsDatabase.ref().child("/players/player2/image").set('scissors'); 
                 rpsDatabase.ref().child("/players/player1/wins").set(player1.wins + 1);
                 rpsDatabase.ref().child("/players/player2/losses").set(player2.losses + 1); 
@@ -149,13 +149,13 @@ $(document).ready(function () {
       }
       playerTurn = 1; 
       rpsDatabase.ref().child("/turn").set(1);
-  }    
-  
+  }     
+    
 // Database references used during the game
 
-  //Game interface and variable assignment based on value of 'players' node
+  //Game interface and variable assignment based on value of each child of 'players' node. 
   rpsDatabase.ref("/players/").on("value", function(snapshot) {
-    
+     
     // Player 1 display and values 
     if (snapshot.child("player1").exists()) {
       player1 = snapshot.val().player1;
@@ -171,7 +171,7 @@ $(document).ready(function () {
         player1ImgChoice.attr('src', 'assets/images/' + player1.image + '.jpg');  
       } else {
         player1ImgChoice.addClass('d-none');   
-      }
+      } 
     } else {   
       player1 = null;
       currentP1 = null; 
@@ -206,19 +206,19 @@ $(document).ready(function () {
       rpsDatabase.ref("/status/").remove();
     }   
 
-    //If either player is not there, then no images are displayed. Source attribute removed to prevent display and 'display: none' set to hide image error screen. 
+    //If either player is not there, then no images or buttons are displayed. Source attribute removed to prevent display and 'display: none' set to hide image error screen. 
     if(!player1 || !player2) {
       player2ImgChoice.removeAttr('src'); 
       player2ImgChoice.addClass('d-none');   
       player1ImgChoice.removeAttr('src'); 
-      player1ImgChoice.addClass('d-none');    
+      player1ImgChoice.addClass('d-none'); 
     }
 
     // Game display and related database references reset if both players leave the game
     if (!player1 && !player2) {
-      rpsDatabase.ref("/messenger/").remove();
       gameResultMessage.children().text(''); 
       messageBoard.empty(); 
+      rpsDatabase.ref("/messenger/").remove();
       rpsDatabase.ref("/turn/").remove();
       rpsDatabase.ref("/status/").remove(); 
     }; 
@@ -251,16 +251,19 @@ $(document).ready(function () {
     playerDisconnectMsg = snapshot.val().name + " has left the game"; 
     disconnectMsgEntry = rpsDatabase.ref().child("/chat/").push().key;  
     rpsDatabase.ref("/messenger/" + disconnectMsgEntry).set(playerDisconnectMsg);
-    
+     
+    //Image of opposite player deleted when anyone leaves the game. Prevents image loading when new player is added
     switch (snapshot.val().name) {
       case (player1.name):
         if (player2) {
           rpsDatabase.ref("/players/player2/image").set(''); 
-        }
+          currentP1 = null; 
+        } 
         break; 
       case (player2.name):
         if (player1) {
           rpsDatabase.ref("/players/player1/image").set('');  
+          currentP2 = null; 
         }
         break;
     } 
@@ -301,15 +304,16 @@ $(document).ready(function () {
       }     
   });    
       
-  // Database reference to update the status of the current game
+  // Database reference to update the status of the current game after each round
   rpsDatabase.ref("/status/").on("value", function(snapshot) {
     tempGameAnswer.children().text(snapshot.val()); 
-  }); 
+  });  
 
-  // Any new messages handled by this listener
+  // Message board controlled by this listener. The color is adjusted based on what type of message is being sent. 
   rpsDatabase.ref("/messenger/").on("child_added", function(snapshot) {
     newMsg = snapshot.val();
     newMsgEl= $("<p>").addClass('m-0').html(newMsg);  
+
     // Change the color of the chat message to match the color of the player. Also make it black when a player leaves or green when a player is added
     if (newMsg.includes("left")) {
       newMsgEl.addClass("text-dark");
@@ -323,15 +327,18 @@ $(document).ready(function () {
     messageBoard.append(newMsgEl);
     messageBoard.scrollTop(messageBoard[0].scrollHeight); 
   });   
-     
+       
 // All click events for the game
 
-  //Submit Button. Does not allow a blank submisson, otherwise sets the player based on which players are occupied
+  //Submit Button. Does not allow a blank submisson, otherwise sets the player based on which players are occupied and sends a message
   addPlayerButton.on('click', function () {
     event.preventDefault(); 
     if (addPlayerInput.val() === "") {
       alert('Your character needs a name');  
-    }  else {
+    }  else if ((addPlayerInput.val() === currentP1) || (addPlayerInput.val() === currentP2)) {
+      alert('That name is taken!');  
+      addPlayerInput.val('').attr('placeholder', 'Enter Player Name');   
+    } else {
           if (player1 === null && addPlayerInput.val() !== '') {
             activePlayer = addPlayerInput.val().trim();
             player1 = {
@@ -364,7 +371,7 @@ $(document).ready(function () {
     addPlayerInput.val('').attr('placeholder', 'Enter Player Name');  
     }
   });      
-
+ 
 // Messenger Button controls for each of the players' independant form
   player1MsgBtn.on("click", function(event) {
     event.preventDefault();
@@ -385,9 +392,9 @@ $(document).ready(function () {
     }
   });  
   
-  //Get the choice of each player from the button click. Only allow if both players are in the game and active user is the current player. Also resets the previous round of play. 
+  //Get the choice of each player from the button click. Only allow if both players are in the game and active user is the current player. Also resets the results from the previous round of play. 
   player1Buttons.on("click", ".player1-button" , function() {
-    event.preventDefault();   
+    event.preventDefault();    
     if (player1 && player2 && playerTurn === 1 && (activePlayer === currentP1)) {
       player1Move = $(this); 
       rpsDatabase.ref().child("/players/player1/image").set(''); 
@@ -405,8 +412,8 @@ $(document).ready(function () {
     if (player1 && player2 && playerTurn === 2 && (activePlayer === currentP2)){
       player2Move = $(this);  
       rpsDatabase.ref('/players/').child('/player2/move').set(player2Move.data('choice'))
-      gameLogic(); 
+      gameLogic(); // Logic of the game runs only after player 2 has made a choice
     }       
   });  
-
-});   
+   
+});     
