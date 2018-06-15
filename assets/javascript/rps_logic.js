@@ -52,7 +52,7 @@ $(document).ready(function () {
   var player1MsgBtn = $("#player1-msg-btn"); 
 
   // Variables and element selectors for player 1 
-  var player2 = null; 
+  var player2 = null;  
   var currentP2 = null;  
   var player2Move  = null; 
   var player2Active = $("#player2-active"); 
@@ -239,7 +239,7 @@ $(document).ready(function () {
   }, function(errorObject) {
     console.log("This failed: " + errorObject.code);
   });     
-
+  
   // Message display for whenever a player leaves the game
   rpsDatabase.ref("/players/").on("child_removed", function(snapshot) {
     playerDisconnectMsg = snapshot.val().name + " has left the game"; 
@@ -286,8 +286,8 @@ $(document).ready(function () {
         gameResultMessage.children().text(`${currentP1} needs to choose`); 
         player1Div.addClass('border-success'); 
         player2Div.removeClass('border-success'); 
-        }  
-    } else if (snapshot.val() === 2) {
+        }   
+    } else if (snapshot.val() === 2) { 
         playerTurn = 2;
         if (player1 && player2) {   
           gameResultMessage.children().text(`${currentP2} needs to choose`); 
@@ -415,5 +415,8 @@ $(document).ready(function () {
       gameLogic(); // Logic of the game runs only after player 2 has made a choice
     }       
   });  
+
+
+
    
 });     
