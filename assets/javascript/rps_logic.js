@@ -14,7 +14,7 @@ $(document).ready(function () {
   // Database reference
   var rpsDatabase = firebase.database();   
      
-  //Selectors
+  //Selectors 
  
   // Used to keep name of specific player for personal diisplay features on each players interface and the current turn in the game
   var activePlayer= null; 
