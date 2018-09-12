@@ -1,15 +1,23 @@
 # Rock Paper Scissors MultiPlayer
-UofT Bootcamp - Week 7 Assignment
 
-# Description
-Online multiplayer rock paper scissors game. 
+## Description
+Classic 'Rock Paper Scissors' brought to life in a web-based application. By including a 'multiplayer' feature, this project was intended to act as a precursor to implementing user authentication. When a user vistis the page, they are either displayed a 'waiting to join' screen or an 'occupied' screen. If there is space available than they may join and face other live users. 
+
+## Screenshots
+
+![](./assets/images/RPS.gif)
+
+## Motivation
+Data persistency is a core feature of any software application, and firebase is an excellent resource for incorporating such abilities into one's application. By setting up a noSQL JSON-based database, I was able to read and write game-data, user information, and scores. This was especially useful for implementing the 'chat' feature of the app, where users can have live conversations as they face off in Rock Paper Scissors.
 
 ## Technology Used
 * HTML
 * CSS
 * Javascript
 * Jquery
-* Firebase DBAAS used for data persistence and multiplayer capabilities
+* Firebase Database as a service
+
+## Screen shots
 
 ##Resolutions
 On difficulty I had when first starting this program was getting the browser to display specific information for each specific player. To solve this I created an 'active player' value that was populated when the user chooses their charatcer's name. I then used this value to determine what to show on the browser, allowing for personalized data on the screen. 
