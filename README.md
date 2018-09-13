@@ -17,9 +17,7 @@ Data persistency is a core feature of any software application, and firebase is 
 * Jquery
 * Firebase Database as a service
 
-## Screen shots
-
-##Resolutions
+## Resolutions
 On difficulty I had when first starting this program was getting the browser to display specific information for each specific player. To solve this I created an 'active player' value that was populated when the user chooses their charatcer's name. I then used this value to determine what to show on the browser, allowing for personalized data on the screen. 
  
 ## Instructions
