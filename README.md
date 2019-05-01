@@ -26,6 +26,4 @@ On difficulty I had when first starting this program was getting the browser to 
 * Send messages your opponenet during the game with the personalzed message board
 * If your opponent leaves, you can remain in the game and wait for another player to join 
 * If you load the page when Player 1 and 2 are active then just wait and refresh the page. Once one leaves the 'join' screen will show
- 
-[Play it here]( https://davidlapadula.github.io/RPS-Multiplayer/)
 
