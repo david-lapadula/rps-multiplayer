@@ -1,4 +1,4 @@
-# Rock Paper Scissors MultiPlayer
+# Rock Paper Scissors Multiplayer
 
 ## Description
 Classic 'Rock Paper Scissors' brought to life in a web-based application. By including a 'multiplayer' feature, this project was intended to act as a precursor to implementing user authentication. When a user vistis the page, they are either displayed a 'waiting to join' screen or an 'occupied' screen. If there is space available than they may join and face other live users. 
