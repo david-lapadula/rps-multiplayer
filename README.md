@@ -21,9 +21,9 @@ Data persistency is a core feature of any software application, and firebase is 
 On difficulty I had when first starting this program was getting the browser to display specific information for each specific player. To solve this I created an 'active player' value that was populated when the user chooses their charatcer's name. I then used this value to determine what to show on the browser, allowing for personalized data on the screen. 
  
 ## Instructions
-* Start as Player 1 and wait for another player, or if Player 1 exists, then start as Player 2 and begin right away 
+* Start as Player 1 and wait for another player, or if Player 1 exists, then start as Player 2 and begin right away.
 * Play rock paper scissors while the game counts your wins, losses, and ties. 
-* Send messages your opponenet during the game with the personalzed message board
-* If your opponent leaves, you can remain in the game and wait for another player to join 
-* If you load the page when Player 1 and 2 are active then just wait and refresh the page. Once one leaves the 'join' screen will show
+* Send messages your opponenet during the game with the personalzed message board.
+* If your opponent leaves, you can remain in the game and wait for another player to join.
+* If you load the page when Player 1 and 2 are active then just wait and refresh the page. Once one leaves the 'join' screen will show.
 
