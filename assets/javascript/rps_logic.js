@@ -2,12 +2,12 @@ $(document).ready(function () {
       
   // Initialize Firebase 
   var config = {
-    apiKey: "AIzaSyAYu99F7dk_r5fh8CWkBbqrAh5YNw1SAkY",
-    authDomain: "rps-database-81187.firebaseapp.com",
-    databaseURL: "https://rps-database-81187.firebaseio.com",
-    projectId: "rps-database-81187",
-    storageBucket: "rps-database-81187.appspot.com", 
-    messagingSenderId: "359029810871"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "", 
+    messagingSenderId: ""
   }; 
   firebase.initializeApp(config);
    
