@@ -11,6 +11,7 @@ This is a simple web-based implementation of the classic Rock Paper Scissors gam
 
 ## Technology
 * HTML/CSS
+* Bootstrap
 * Javascript
 * Jquery
 * [Firebase](https://console.firebase.google.com/)
