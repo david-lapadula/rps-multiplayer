@@ -4,7 +4,7 @@
 1. [Description](#description)
 2. [Technology](#technology)
 3. [Installation](#installation)
-4. [Sample](#sample)
+4. [Usage](#usage)
 
 ## Description
 This is a simple web-based implementation of the classic Rock Paper Scissors game, powered by Firebase for data storage.
@@ -31,6 +31,6 @@ cd rpsmultiplayer
 
 3. Open a browswer and enter a the path to the `index.html` file of the repository in the address bar.
 
-## Sample
+## Usage
 ![](./assets/images/RPS.gif)
 
