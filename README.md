@@ -20,8 +20,8 @@ This is a simple web-based implementation of the classic Rock Paper Scissors gam
 
 1. Clone the repository.
 ```bash
-git clone https://github.com/DavidLapadula/RPSMultiplayer.git
-cd rpsmultiplayer
+git clone https://github.com/DavidLapadula/rps-multiplayer.git
+cd rps-multiplayer
 ```
 
 2. Set up Firebase.
